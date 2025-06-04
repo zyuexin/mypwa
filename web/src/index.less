@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+}
+#root {
+    overflow: hidden;
+    padding: 1rem;
+    padding-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
 @layer base {
     :root {
         --background: 0 0% 100%;
