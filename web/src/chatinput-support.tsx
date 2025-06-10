@@ -1,5 +1,5 @@
 import { useCallback, useContext } from 'react';
-import { Paperclip, Mic, CornerDownLeft } from 'lucide-react';
+import { XCircle, Upload, CornerDownLeft } from 'lucide-react';
 import { ChatInput, Button } from '@/components';
 import { Store } from './context';
 import { generateNewMsg } from './utils';
@@ -36,10 +36,10 @@ export default function ChatInputSupport(props: any) {
                 />
                 <div className='flex items-center p-1 pt-0'>
                     <Button size='icon' variant='ghost'>
-                        <Paperclip size={20} />
+                        <XCircle onClick={() => setCurrentInput('')} size={20} />
                     </Button>
                     <Button size='icon' variant='ghost'>
-                        <Mic size={20} />
+                        <Upload size={20} />
                     </Button>
                     <Button size='sm' className='ml-auto' onClick={doSend}>
                         <span className='hidden sm:inline-block'>发送</span>

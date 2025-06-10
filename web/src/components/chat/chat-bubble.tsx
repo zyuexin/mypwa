@@ -6,6 +6,43 @@ import { Avatar, AvatarImage, AvatarFallback, Button, ButtonProps } from '..';
 import MessageLoading from './message-loading';
 import './index.less';
 
+// 匹配 http(s)://... 或 www. 开头或仅是域名的情况
+const urlPattern =
+    /(https?:\/\/)?(([0-9a-z.]+\.[a-z]+)|(([0-9]{1,3}\.){3}[0-9]{1,3}))(:[0-9]+)?(\/[0-9a-z%/.\-_]*)?(\?[0-9a-z=&%_\-]*)?(\#[0-9a-z=&%_\-]*)?/gi;
+
+function replaceUrlsWithLinks(text: any): React.ReactNode {
+    const parts: React.ReactNode[] = [];
+    let lastIndex = 0;
+
+    // 使用 matchAll 获取所有匹配项及其索引
+    for (const match of text.matchAll(urlPattern)) {
+        const [url] = match;
+        const index = match.index!;
+
+        // 添加非链接部分
+        if (index > lastIndex) {
+            parts.push(text.slice(lastIndex, index));
+        }
+
+        // 添加 <a> 标签
+        const href = /^https?:\/\//i.test(url) ? url : `https://${url}`;
+        parts.push(
+            <a key={index} href={href} target='_blank' rel='noopener noreferrer' className='underline text-blue-500'>
+                {url}
+            </a>
+        );
+
+        lastIndex = index + url.length;
+    }
+
+    // 添加最后剩余的文本
+    if (lastIndex < text.length) {
+        parts.push(text.slice(lastIndex));
+    }
+
+    return parts;
+}
+
 // ChatBubble
 const chatBubbleVariant = cva('flex gap-2 w-full relative group', {
     variants: {
@@ -89,7 +126,7 @@ const ChatBubbleMessage = React.forwardRef<HTMLDivElement, ChatBubbleMessageProp
                         <MessageLoading />
                     </div>
                 ) : (
-                    children
+                    replaceUrlsWithLinks(children)
                 )}
             </div>
         );
