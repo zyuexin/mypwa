@@ -95,6 +95,15 @@ const getSenderDetail = () => {
         osVersion: bowserParser.getOSVersion()
     };
 };
+
+export const getFileType = (filename: string) => {
+    return '';
+};
+
+export const isImageType = (filename: string) => {
+    return ['jpg', 'jpeg', 'png', 'bmp', 'tif', 'tiff', 'svg', 'webp'].includes(filename);
+};
+
 export const generateNewMsg = (msg: string): WSSendJson => {
     return {
         action: WSSendJsonAction.SendNewMsg,

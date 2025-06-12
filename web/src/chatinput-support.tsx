@@ -1,6 +1,7 @@
 import { useCallback, useContext } from 'react';
 import { XCircle, Paperclip, CornerDownLeft } from 'lucide-react';
 import { ChatInput, Button } from '@/components';
+import FileUpload from './fileUpload';
 import { Store } from './context';
 import { generateNewMsg } from './utils';
 export default function ChatInputSupport(props: any) {
@@ -27,11 +28,7 @@ export default function ChatInputSupport(props: any) {
     return (
         <div className='px-4 pb-4 bg-muted/20 min-h-24 mt-4'>
             <div className='relative rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring'>
-                <div className='w-full h-16 p-2'>
-                    <div className='px-2 bg-gray-100 w-full h-full rounded-md flex items-center gap-4'>
-                        <div className='size-8 bg-gray-200'></div>
-                    </div>
-                </div>
+                <FileUpload />
                 <ChatInput
                     placeholder='请输入...'
                     onKeyDown={handleEnter}

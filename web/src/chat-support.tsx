@@ -59,7 +59,7 @@ function ChatSupport(_: unknown, ref: Ref<unknown> | undefined) {
                     title: '删除',
                     icon: <Trash size={12} className='mr-1' />,
                     onClick: () => {
-                        toast.error('确定要删除吗 ?', {
+                        toast.error('确定要删除消息吗 ?', {
                             action: {
                                 label: '确定',
                                 onClick: () => sendJsonMessage(generateDeleteMsgJson(messageData.id))
